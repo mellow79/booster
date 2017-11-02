@@ -33,13 +33,6 @@ class HomeController extends Controller
       ->where('review.fid',$request->id)
       ->groupBy('fundraiser.id')
       ->get();
-    /* get selected fundraiser from database */
-    /*$sql_data = DB::select(DB::raw(
-      "SELECT f.*, r.*
-      FROM fundraiser as f
-      INNER JOIN review as r on(f.id = r.fid)
-      WHERE f.id = $request->id"
-      ));*/
 
     if ($sql_data) {
 
