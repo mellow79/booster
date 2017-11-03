@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
-
+use Illuminate\Http\Response;
 class RatingController extends Controller
 {
     //add rating
@@ -23,15 +23,63 @@ class RatingController extends Controller
         ,'reviewer_email' => $reviewer_email
         ,'review' => $review,
         'review_date'=> $review_date]
-    )->where('id',$request->id);
-
-    dd($data);
+    );
 
     if($data){
-      return true;
+      $response_array['status'] = 'success';
     } else {
-      return false;
+      $response_array['status'] = 'error';
     }
+
+    return response()->json($response_array);
+
+  }
+
+
+  // adds review information the database
+  public function addReview(Request $request) {
+
+    $reviewer_name = (isset($request->reviewer_name)) ? $request->reviewer_name : 'Anonymous';
+    $reviewer_email = (isset($request->reviewer_email)) ? $request->reviewer_email : '';
+    $review = (isset($request->review)) ? $request->review : '';
+    $review_date = date("Y-m-d H:i:s");
+
+    $data = DB::table('review')->insert(
+      [
+        'fid'=> $request->id
+        ,'rating'=> $request->rating
+        ,'reviewer_name' => $reviewer_name
+        ,'reviewer_email' => $reviewer_email
+        ,'review' => $review,
+        'review_date'=> $review_date]
+    );
+
+    if($data){
+      $response_array['status'] = 'success';
+    } else {
+      $response_array['status'] = 'error';
+    }
+
+    return response()->json($response_array);
+
+  }
+
+  // adds review information the database
+  public function addFundraiser(Request $request) {
+
+    $data = DB::table('fundraiser')->insert(
+      ['fundraiser_name' => $request->new_fundraiser]
+    );
+
+    $this->addReview($data->save());
+
+    if($data){
+      $response_array['status'] = 'success';
+    } else {
+      $response_array['status'] = 'error';
+    }
+
+    return response()->json($response_array);
 
   }
 }

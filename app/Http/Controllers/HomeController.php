@@ -14,7 +14,7 @@ class HomeController extends Controller
         ,'fundraiser.fundraiser_name'
         ,DB::raw('count(review.fid) as total_reviews')
         ,DB::raw('sum(review.rating) as rating'))
-      ->join('review', 'fundraiser.id', '=', 'review.fid')
+      ->leftJoin('review', 'fundraiser.id', '=', 'review.fid')
       ->groupBy('fundraiser.id')
       ->get();
 
@@ -30,7 +30,7 @@ class HomeController extends Controller
         ,DB::raw('count(review.fid) as total_reviews')
         ,DB::raw('sum(review.rating) as rating'))
       ->join('review', 'fundraiser.id', '=', 'review.fid')
-      ->where('review.fid',$request->id)
+      ->where('fundraiser.id',$request->id)
       ->groupBy('fundraiser.id')
       ->get();
 

@@ -37,3 +37,13 @@ Route::post('/add_rating/', [
   'as' => 'add_rating',
   'uses' => 'RatingController@addRating'
 ]);
+
+Route::post('/add_review/', [
+  'as' => 'add_review',
+  'uses' => 'RatingController@addReview'
+]);
+
+Route::post('/add_fundraiser/', [
+  'as' => 'add_fundraiser',
+  'uses' => 'RatingController@addFundraiser'
+]);

@@ -8,7 +8,7 @@
                 @if(count($sql_data))
 
                     @php $rate_times = $data->total_reviews @endphp
-                    @php $rate_value = round($data->rating/$rate_times,1) @endphp
+                    @php $rate_value = floor($data->rating/$rate_times) @endphp
                     @php $rate_bg = (($rate_value)/5)*100 @endphp
 
                 @else
@@ -47,15 +47,19 @@
                             <div class="col-md-6">
                                 <div id="commentContainer">
                                     <p>Leave a review/comment on what you thought of the fundraiser</p>
-                                    <form id="comment-form">
+                                    <form id="review_form" class="form-horizontal" role="form" method="POST">
+                                        <input type="hidden" name="id" id="id" value="{{ $data->id }}"/>
+                                        <input type="hidden" name="rating" id="rating" value="{{ $rate_value}}"/>
+                                        {!! csrf_field() !!}
                                         <textarea name="review"
                                                   required
+                                                  rows="4" cols="80"
                                                   class="form-control"
                                                   id="review"
                                                   placeholder="Write a Review...">
                                         </textarea>
-                                        <div style="display: block;">
-                                            <div id="">
+                                        <div>
+                                            <div>
                                                 <fieldset>
                                                     <div class="form-group">
                                                     <label for="reviewer_email">Email (Required)</label>
@@ -77,9 +81,8 @@
                                                     </div>
                                                 </fieldset>
                                             </div>
-                                            <input type="submit" name="submit" class="form-button"
-                                                   id="submit" value="Post Comment">
-                                            <span id="jp-carousel-comment-form-spinner">&nbsp;</span>
+                                            <input type="submit" id="submit" name="submit"
+                                                   value="Post Comment">
                                         </div>
                                     </form>
                                 </div><!-- /rate-result-cnt -->

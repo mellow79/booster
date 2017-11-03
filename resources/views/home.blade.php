@@ -86,44 +86,37 @@
         </div>
         <!-- /.col-md-4 -->
 
-    </div>\
-
-    <div id="myModal" class="modal fade">
-
-        <div class="modal-dialog">
-
-            <div class="modal-content">
-
-                <div class="modal-header">
-
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-
-                    <h4 class="modal-title">Confirmation</h4>
-
-                </div>
-
-                <div class="modal-body">
-
-                    <p>Do you want to save changes you made to document before closing?</p>
-
-                    <p class="text-warning"><small>If you don't save, your changes will be lost.</small></p>
-
-                </div>
-
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-                    <button type="button" class="btn btn-primary">Save changes</button>
-
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fa fa-close"></i></span>
+                    </button>
 
-
+                </div>
+                <h4 class="modal-title text-center">NEW FUNDRAISER</h4>
+                <div class="modal-body">
+                    <!-- The form is placed inside the body of modal -->
+                    <form id="new_fundraiser_form" class="form-horizontal">
+                        {!! csrf_field() !!}
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label">Fundraiser Name</label>
+                            <div class="col-xs-5">
+                                <input type="text" class="form-control" name="new_fundraiser" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-5 col-xs-offset-3 pull-left">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="Save">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- /.row -->
 @endsection
